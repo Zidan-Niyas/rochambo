@@ -12,14 +12,6 @@ const getComputerChoice = () => {
     return choices[randomNumber];
 }
 
-// const updateUserScore = () => {
-//     userScore++;
-// }
-
-// const updateComputerScore = () => {
-//     computerScore++;
-// }
-
 const playRound = (u, c) => {
     if(u === c) {
         console.log("No one wins, play again.");
