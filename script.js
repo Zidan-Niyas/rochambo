@@ -1,42 +1,73 @@
+let userScore = 0;
+let computerScore = 0;
 
-let again = null;
-do {
-console.log("---- Start Game ----");
-const user = prompt('Choose, rock paper or scissors?');
-const choices = ['rock','paper','scissors'];
-let randomNumber = Math.floor(Math.random()*choices.length);
-const computer = choices[randomNumber];
-console.log(`User chose "${user}" & Computer chose "${computer}"`);
+const getUserChoice = () => {
+    const val = prompt('Choose, rock paper or scissors?');
+    return val;
+}
 
-const check = (u, c) => {
+const getComputerChoice = () => {
+    const choices = ['rock','paper','scissors'];
+    let randomNumber = Math.floor(Math.random()*choices.length);
+    return choices[randomNumber];
+}
+
+// const updateUserScore = () => {
+//     userScore++;
+// }
+
+// const updateComputerScore = () => {
+//     computerScore++;
+// }
+
+const playRound = (u, c) => {
     if(u === c) {
         console.log("No one wins, play again.");
     }
     else if(u == 'rock' && c == 'scissors') {
-        console.log('USER WINS!');
+        console.log('YOU WIN, rock beats scissors!');
+        userScore++;
     }
     else if(u == 'rock' && c == 'paper') {
-        console.log('COMPUTER WINS!');
+        console.log('YOU LOSE, paper beats rock!');
+        computerScore++;
     }
     else if(u == 'paper' && c == 'scissors') {
-        console.log('COMPUTER WINS!');
+        console.log('YOU LOSE, scissors beat paper!');
+        computerScore++;
     }
     else if(u == 'paper' && c == 'rock') {
-        console.log('USER WINS!');
+        console.log('YOU WIN, paper beats rock!');
+        userScore++;
     }
     else if(u == 'scissors' && c == 'rock') {
-        console.log('COMPUTER WINS!');
+        console.log('YOU LOSE, rock beats scissors');
+        computerScore++;
     }
     else if(u == 'scissors' && c == 'paper') {
-        console.log('USER WINS!');
+        console.log('YOU WIN, scissors beat paper');
+        userScore++;
     }
     else {
         console.log('Invalid choice, try again!')
     }
 }
 
-check(user, computer);
+const playGame = () => {
+    console.log("-------- Start Game -------");
+    for(let i=1; i<=5; i++) {
+        console.log(`ROUND ${i}/5`);
+        const user = getUserChoice();
+        const computer = getComputerChoice();
+        playRound(user.toLowerCase(), computer.toLowerCase());
+        console.log(`User - ${userScore}  Computer - ${computerScore}`);
+    }
+    if(userScore > computerScore) {
+        console.log('FINAL RESULT : You are the winner!!!')
+    }
+    else {
+        console.log('FINAL RESULT : Computer wins');
+    }
+}
 
-again = prompt('Do you want to play again (y or n) ?');
-
-} while(again == 'y');
+playGame();
