@@ -55,10 +55,10 @@ const playGame = () => {
         console.log(`User - ${userScore}  Computer - ${computerScore}`);
     }
     if(userScore > computerScore) {
-        console.log('FINAL RESULT : You are the winner!!!')
+        console.log('----- FINAL RESULT : You are the winner!! -----')
     }
     else {
-        console.log('FINAL RESULT : Computer wins');
+        console.log('----- FINAL RESULT : Computer wins -----');
     }
 }
 
