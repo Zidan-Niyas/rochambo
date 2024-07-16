@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    background-color:antiquewhite;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+h3 {
+    margin-top: 100px;
+    font-size:x-large;
+    color:rgb(255, 0, 0);
+}
+
+p {
+    margin-top: 3px;
+    font-size: large;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    /* border: 3px solid rgb(181, 179, 179); */
+    padding: 30px;
+}
+
+#score {
+    display: flex;
+    margin-top: 45px;
+    justify-content: space-around;
+    border: 2px solid rgb(47, 46, 46);
+    border-radius: 5px;
+    padding: 30px 0;
+    width: 50%;
+    font-size: 25px;
+}
+
+#container button {
+    padding: 40px 70px;
+    font-size: large;
+    font-weight: 600;
+    margin: 0 10px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+#rock {
+    background-color: brown;
+}
+
+#rock:hover {
+    background-color: rgb(219, 55, 55);
+}
+
+#paper {
+    background-color: blue;
+}
+
+#paper:hover {
+    background-color: rgb(0, 157, 255);
+}
+
+#scissors {
+    background-color: green;
+}
+
+#scissors:hover {
+    background-color: rgb(8, 182, 8);
+}
+
+#container button:hover {
+    cursor: pointer;
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.winner {
+    font-size:xx-large;
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+.reset {
+    padding: 20px 40px;
+    background-color: rgb(160, 159, 159);
+    border-radius: 5px;
+    border: none;
+    font-size: 17px;
+    color: white;
+    margin-top: 20px;
+}
+
+.reset:hover {
+    background-color: gray;
+    cursor: pointer;
+}

@@ -1,10 +1,15 @@
 let userScore = 0;
 let computerScore = 0;
+const res = document.querySelector("#results");
+const result = document.createElement("p");
+const player = document.querySelector("#userScore");
+const computer = document.querySelector("#computerScore");
+const winner = document.createElement("p");
+const resetButton = document.createElement("button");
+winner.classList.add("winner");
+player.textContent = userScore;
+computer.textContent = computerScore;
 
-const getUserChoice = () => {
-    const val = prompt('Choose, rock paper or scissors?');
-    return val;
-}
 
 const getComputerChoice = () => {
     const choices = ['rock','paper','scissors'];
@@ -12,54 +17,107 @@ const getComputerChoice = () => {
     return choices[randomNumber];
 }
 
+const updateUserScore = () => {
+    userScore++;
+    player.textContent = userScore;
+}
+
+const updateComputerScore = () => {
+    computerScore++;
+    computer.textContent = computerScore;
+}
+
 const playRound = (u, c) => {
     if(u === c) {
-        console.log("No one wins, play again.");
+        result.textContent = "No one wins, play again.";
     }
     else if(u == 'rock' && c == 'scissors') {
-        console.log('YOU WIN, rock beats scissors!');
-        userScore++;
+        result.textContent = 'YOU WIN, rock beats scissors!';
+        updateUserScore();
     }
     else if(u == 'rock' && c == 'paper') {
-        console.log('YOU LOSE, paper beats rock!');
-        computerScore++;
+        result.textContent = 'YOU LOSE, paper beats rock!';
+        updateComputerScore();
     }
     else if(u == 'paper' && c == 'scissors') {
-        console.log('YOU LOSE, scissors beat paper!');
-        computerScore++;
+        result.textContent = 'YOU LOSE, scissors beat paper!';
+        updateComputerScore();
     }
     else if(u == 'paper' && c == 'rock') {
-        console.log('YOU WIN, paper beats rock!');
-        userScore++;
+        result.textContent = 'YOU WIN, paper beats rock!';
+        updateUserScore();
     }
     else if(u == 'scissors' && c == 'rock') {
-        console.log('YOU LOSE, rock beats scissors');
-        computerScore++;
+        result.textContent = 'YOU LOSE, rock beats scissors';
+        updateComputerScore();
     }
     else if(u == 'scissors' && c == 'paper') {
-        console.log('YOU WIN, scissors beat paper');
-        userScore++;
+        result.textContent = 'YOU WIN, scissors beat paper';
+        updateUserScore();
     }
     else {
-        console.log('Invalid choice, try again!')
+        alert('Invalid choice, try again!');
     }
+    res.appendChild(result);
 }
 
-const playGame = () => {
-    console.log("-------- Start Game -------");
-    for(let i=1; i<=5; i++) {
-        console.log(`ROUND ${i}/5`);
-        const user = getUserChoice();
-        const computer = getComputerChoice();
-        playRound(user.toLowerCase(), computer.toLowerCase());
-        console.log(`User - ${userScore}  Computer - ${computerScore}`);
-    }
-    if(userScore > computerScore) {
-        console.log('----- FINAL RESULT : You are the winner!! -----')
-    }
-    else {
-        console.log('----- FINAL RESULT : Computer wins -----');
-    }
+const reset = () => {
+    resetButton.textContent = "Play Again";
+    resetButton.classList.add("reset");
+    res.appendChild(resetButton);
+    resetButton.addEventListener("click", resetGame);
 }
 
-playGame();
+const resetGame = () => {
+    userScore = 0;
+    computerScore = 0;
+    player.textContent = userScore;
+    computer.textContent = computerScore;
+    res.removeChild(winner);
+    res.removeChild(resetButton);
+}
+
+const checkGame = () => {
+    if(userScore == 5) {
+        winner.textContent = "YOU ARE THE WINNER !!!";
+        result.textContent = '';
+        res.appendChild(winner);
+        reset();
+    }
+    else if(computerScore == 5) {
+        winner.textContent = "COMPUTER WINS";
+        result.textContent = '';
+        res.appendChild(winner);
+        reset();
+    }
+    
+}
+ 
+const btn = document.querySelectorAll("button");
+btn.forEach((item) => {
+    item.addEventListener("click", (event) => {
+        const choice = event.target.id;
+        console.log(choice);
+        let playerSelection = '';
+        switch(choice) {
+            case 'rock':
+                playerSelection = "rock";
+                console.log(`Player selected ${playerSelection}`);
+                break;
+            case 'paper':
+                playerSelection = "paper";
+                console.log(`Player selected ${playerSelection}`);
+                break;
+            case 'scissors':
+                playerSelection = "scissors";
+                console.log(`Player selected ${playerSelection}`);
+                break;
+            default :
+                alert("error");
+                break;
+        }
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        checkGame();
+    });
+});
